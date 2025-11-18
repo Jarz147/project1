@@ -66,7 +66,19 @@
       box-shadow: var(--shadow);
     }
     
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
     .logo {
+      height: 40px;
+      max-width: 200px;
+      object-fit: contain;
+    }
+    
+    .logo-text {
       color: white;
       font-size: 1.5rem;
       font-weight: 700;
@@ -248,6 +260,149 @@
       transform: translateY(0);
     }
     
+    /* Configuration Page Styles */
+    .config-container {
+      background: white;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .config-section {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .config-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+    
+    .logo-preview {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1.5rem;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      background: #f8f9fa;
+    }
+    
+    .logo-preview img {
+      max-height: 80px;
+      max-width: 100%;
+      object-fit: contain;
+    }
+    
+    .logo-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .btn-secondary {
+      background: var(--text-light);
+    }
+    
+    .btn-secondary:hover {
+      background: #5a6268;
+    }
+    
+    .color-picker {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    
+    .color-option {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: transform 0.2s;
+    }
+    
+    .color-option:hover {
+      transform: scale(1.1);
+    }
+    
+    .color-option.active {
+      border-color: var(--text);
+    }
+    
+    /* Photo Upload Styles */
+    .photo-upload-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .photo-upload-box {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      background-color: #f8f9fa;
+    }
+    
+    .photo-upload-box:hover {
+      border-color: var(--primary);
+      background-color: #e9ecef;
+    }
+    
+    .photo-upload-box i {
+      font-size: 2rem;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+    
+    .photo-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    
+    .photo-item {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .photo-item .remove-photo {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: var(--danger);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    
     /* Table Styles */
     .table-container {
       background: white;
@@ -332,6 +487,62 @@
       color: white;
     }
     
+    /* Photo Gallery in Table */
+    .photo-gallery {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .photo-thumbnail {
+      width: 60px;
+      height: 60px;
+      border-radius: 4px;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .photo-thumbnail:hover {
+      transform: scale(1.1);
+    }
+    
+    /* Modal for Photo View */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    
+    .modal-content img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+    
     /* Responsive adjustments */
     @media (max-width: 768px) {
       body {
@@ -369,6 +580,15 @@
       table {
         display: block;
         overflow-x: auto;
+      }
+      
+      .photo-item {
+        width: 80px;
+        height: 80px;
+      }
+      
+      .logo-actions {
+        flex-direction: column;
       }
     }
     
@@ -412,11 +632,15 @@
 <body>
   <!-- Navigation -->
   <nav class="navbar">
-    <div class="logo">Sistem Manajemen Scissor Lift</div>
+    <div class="logo-container">
+      <img id="headerLogo" class="logo" src="" alt="Logo Perusahaan">
+      <div id="headerText" class="logo-text">Sistem Manajemen Scissor Lift</div>
+    </div>
     <div class="nav-links">
       <a href="#" class="nav-link active" data-page="landing">Beranda</a>
       <a href="#" class="nav-link" data-page="reserve">Reservasi</a>
       <a href="#" class="nav-link" data-page="historical">Riwayat</a>
+      <a href="#" class="nav-link" data-page="configuration">Konfigurasi</a>
     </div>
   </nav>
 
@@ -437,6 +661,12 @@
           <i class="fas fa-history"></i>
           <h3>Riwayat</h3>
           <p>Lihat riwayat reservasi dan penggunaan</p>
+        </a>
+        
+        <a href="#" class="action-btn" data-page="configuration">
+          <i class="fas fa-cog"></i>
+          <h3>Konfigurasi</h3>
+          <p>Ubah logo dan pengaturan sistem</p>
         </a>
       </div>
     </div>
@@ -476,13 +706,27 @@
         </div>
         
         <div class="form-group">
-          <label for="kondisiSebelum">Kondisi Sebelum</label>
-          <textarea id="kondisiSebelum" placeholder="Deskripsikan kondisi scissor lift sebelum digunakan..."></textarea>
+          <label>Kondisi Sebelum</label>
+          <div class="photo-upload-container">
+            <div class="photo-upload-box" id="sebelumUpload">
+              <i class="fas fa-camera"></i>
+              <p>Klik untuk menambahkan foto kondisi sebelum</p>
+              <input type="file" id="sebelumInput" accept="image/*" multiple style="display: none;">
+            </div>
+            <div class="photo-preview" id="sebelumPreview"></div>
+          </div>
         </div>
         
         <div class="form-group">
-          <label for="kondisiSesudah">Kondisi Sesudah</label>
-          <textarea id="kondisiSesudah" placeholder="Deskripsikan kondisi scissor lift setelah digunakan..."></textarea>
+          <label>Kondisi Sesudah</label>
+          <div class="photo-upload-container">
+            <div class="photo-upload-box" id="sesudahUpload">
+              <i class="fas fa-camera"></i>
+              <p>Klik untuk menambahkan foto kondisi sesudah</p>
+              <input type="file" id="sesudahInput" accept="image/*" multiple style="display: none;">
+            </div>
+            <div class="photo-preview" id="sesudahPreview"></div>
+          </div>
         </div>
         
         <button type="submit">Simpan Pemakaian</button>
@@ -494,7 +738,8 @@
           <h3><i class="fas fa-info-circle"></i> Petunjuk Pengisian</h3>
           <ul>
             <li>Isi semua bidang yang wajib diisi (ditandai dengan *)</li>
-            <li>Berikan detail kondisi peralatan yang akurat</li>
+            <li>Tambahkan foto kondisi sebelum dan sesudah penggunaan</li>
+            <li>Foto akan membantu dokumentasi kondisi peralatan</li>
             <li>Catat waktu mulai dan selesai dengan tepat</li>
             <li>Tentukan lokasi kerja yang jelas</li>
             <li>Periksa kembali data sebelum menyimpan</li>
@@ -542,7 +787,7 @@
             <th>Mulai</th>
             <th>Selesai</th>
             <th>Lokasi</th>
-            <th>Keterangan</th>
+            <th>Foto</th>
             <th>Aksi</th>
           </tr>
         </thead>
@@ -551,7 +796,143 @@
     </div>
   </section>
 
+  <!-- Configuration Page -->
+  <section id="configuration" class="page">
+    <h1>Konfigurasi Sistem</h1>
+    
+    <div class="config-container">
+      <div class="config-section">
+        <h2><i class="fas fa-image"></i> Pengaturan Logo</h2>
+        <p>Unggah logo perusahaan Anda untuk ditampilkan di header aplikasi.</p>
+        
+        <div class="logo-preview">
+          <img id="logoPreview" src="" alt="Preview Logo">
+          <div id="logoTextPreview" class="logo-text">Sistem Manajemen Scissor Lift</div>
+        </div>
+        
+        <div class="form-group">
+          <label for="logoUpload">Unggah Logo Baru</label>
+          <input type="file" id="logoUpload" accept="image/*">
+        </div>
+        
+        <div class="form-group">
+          <label for="companyName">Nama Perusahaan</label>
+          <input type="text" id="companyName" placeholder="Masukkan nama perusahaan">
+        </div>
+        
+        <div class="logo-actions">
+          <button id="saveLogo" class="btn-primary">Simpan Logo</button>
+          <button id="resetLogo" class="btn-secondary">Reset ke Default</button>
+        </div>
+      </div>
+      
+      <div class="config-section">
+        <h2><i class="fas fa-palette"></i> Pengaturan Warna</h2>
+        <p>Pilih skema warna untuk aplikasi.</p>
+        
+        <div class="color-picker">
+          <div class="color-option active" style="background-color: #005f9e;" data-color="#005f9e"></div>
+          <div class="color-option" style="background-color: #28a745;" data-color="#28a745"></div>
+          <div class="color-option" style="background-color: #dc3545;" data-color="#dc3545"></div>
+          <div class="color-option" style="background-color: #6f42c1;" data-color="#6f42c1"></div>
+          <div class="color-option" style="background-color: #fd7e14;" data-color="#fd7e14"></div>
+          <div class="color-option" style="background-color: #20c997;" data-color="#20c997"></div>
+        </div>
+        
+        <button id="saveColor" class="btn-primary" style="margin-top: 1rem;">Simpan Warna</button>
+      </div>
+      
+      <div class="config-section">
+        <h2><i class="fas fa-database"></i> Pengaturan Data</h2>
+        <p>Kelola data yang tersimpan di aplikasi.</p>
+        
+        <div class="form-group">
+          <button id="exportData" class="btn-primary">Ekspor Data ke JSON</button>
+          <button id="importData" class="btn-secondary" style="margin-top: 0.5rem;">Impor Data dari JSON</button>
+          <input type="file" id="importFile" accept=".json" style="display: none;">
+        </div>
+        
+        <div class="form-group">
+          <button id="clearData" class="btn-danger">Hapus Semua Data</button>
+          <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 0.5rem;">
+            Peringatan: Tindakan ini akan menghapus semua data riwayat dan tidak dapat dibatalkan.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal for Photo View -->
+  <div id="photoModal" class="modal">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+      <img id="modalImage" src="" alt="Foto Kondisi">
+    </div>
+  </div>
+
   <script>
+    // Configuration Management
+    let appConfig = JSON.parse(localStorage.getItem('appConfig')) || {
+      logo: '',
+      companyName: 'Sistem Manajemen Scissor Lift',
+      primaryColor: '#005f9e'
+    };
+
+    // Apply configuration on page load
+    function applyConfiguration() {
+      // Apply logo
+      const headerLogo = document.getElementById('headerLogo');
+      const logoPreview = document.getElementById('logoPreview');
+      const headerText = document.getElementById('headerText');
+      const logoTextPreview = document.getElementById('logoTextPreview');
+      
+      if (appConfig.logo) {
+        headerLogo.src = appConfig.logo;
+        logoPreview.src = appConfig.logo;
+        headerText.style.display = 'none';
+        logoTextPreview.style.display = 'none';
+      } else {
+        headerLogo.style.display = 'none';
+        logoPreview.style.display = 'none';
+        headerText.textContent = appConfig.companyName;
+        logoTextPreview.textContent = appConfig.companyName;
+      }
+      
+      // Apply primary color
+      document.documentElement.style.setProperty('--primary', appConfig.primaryColor);
+      document.documentElement.style.setProperty('--primary-light', lightenColor(appConfig.primaryColor, 20));
+      document.documentElement.style.setProperty('--primary-dark', darkenColor(appConfig.primaryColor, 20));
+    }
+    
+    // Color utility functions
+    function lightenColor(color, percent) {
+      const num = parseInt(color.replace("#", ""), 16);
+      const amt = Math.round(2.55 * percent);
+      const R = (num >> 16) + amt;
+      const G = (num >> 8 & 0x00FF) + amt;
+      const B = (num & 0x0000FF) + amt;
+      return "#" + (
+        0x1000000 +
+        (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+        (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+        (B < 255 ? (B < 1 ? 0 : B) : 255)
+      ).toString(16).slice(1);
+    }
+    
+    function darkenColor(color, percent) {
+      const num = parseInt(color.replace("#", ""), 16);
+      const amt = Math.round(2.55 * percent);
+      const R = (num >> 16) - amt;
+      const G = (num >> 8 & 0x00FF) - amt;
+      const B = (num & 0x0000FF) - amt;
+      return "#" + (
+        0x1000000 +
+        (R > 0 ? (R < 255 ? R : 255) : 0) * 0x10000 +
+        (G > 0 ? (G < 255 ? G : 255) : 0) * 0x100 +
+        (B > 0 ? (B < 255 ? B : 255) : 0)
+      ).toString(16).slice(1);
+    }
+
     // Page Navigation
     document.querySelectorAll('.nav-link, .action-btn').forEach(link => {
       link.addEventListener('click', function(e) {
@@ -578,152 +959,156 @@
     const tableBody = document.querySelector("#dataTable tbody");
     let savedData = JSON.parse(localStorage.getItem('scissorLiftData')) || [];
 
-    // Load saved data on page load
-    window.addEventListener('DOMContentLoaded', () => {
-      renderTable();
+    // Photo Upload Functionality
+    const sebelumUpload = document.getElementById('sebelumUpload');
+    const sebelumInput = document.getElementById('sebelumInput');
+    const sebelumPreview = document.getElementById('sebelumPreview');
+    
+    const sesudahUpload = document.getElementById('sesudahUpload');
+    const sesudahInput = document.getElementById('sesudahInput');
+    const sesudahPreview = document.getElementById('sesudahPreview');
+    
+    let sebelumPhotos = [];
+    let sesudahPhotos = [];
+    
+    // Set up photo upload for kondisi sebelum
+    sebelumUpload.addEventListener('click', () => {
+      sebelumInput.click();
     });
-
-    function addRow(type, nama, unit, mulai, selesai, lokasi, ket) {
-      const newEntry = {
-        id: Date.now(), // Unique ID for each entry
-        type,
-        nama,
-        unit,
-        mulai,
-        selesai,
-        lokasi,
-        ket,
-        timestamp: new Date().toISOString()
-      };
+    
+    sebelumInput.addEventListener('change', (e) => {
+      handlePhotoUpload(e, sebelumPhotos, sebelumPreview);
+    });
+    
+    // Set up photo upload for kondisi sesudah
+    sesudahUpload.addEventListener('click', () => {
+      sesudahInput.click();
+    });
+    
+    sesudahInput.addEventListener('change', (e) => {
+      handlePhotoUpload(e, sesudahPhotos, sesudahPreview);
+    });
+    
+    function handlePhotoUpload(event, photoArray, previewContainer) {
+      const files = event.target.files;
       
-      savedData.push(newEntry);
-      localStorage.setItem('scissorLiftData', JSON.stringify(savedData));
-      renderTable();
-    }
-
-    function deleteRow(id) {
-      if (confirm("Apakah Anda yakin ingin menghapus data ini?")) {
-        savedData = savedData.filter(entry => entry.id !== id);
-        localStorage.setItem('scissorLiftData', JSON.stringify(savedData));
-        renderTable();
-        showSuccessMessage("Data berhasil dihapus!");
-      }
-    }
-
-    function renderTable() {
-      tableBody.innerHTML = '';
-      
-      if (savedData.length === 0) {
-        const row = document.createElement("tr");
-        row.innerHTML = `<td colspan="8" style="text-align: center; padding: 2rem;">Tidak ada data tersimpan</td>`;
-        tableBody.appendChild(row);
-        return;
-      }
-      
-      savedData.forEach(entry => {
-        const row = document.createElement("tr");
-        const statusClass = entry.type === "Reservasi" ? "status-reservasi" : "status-pemakaian";
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
         
-        row.innerHTML = `
-          <td><span class="${statusClass}">${entry.type}</span></td>
-          <td>${entry.nama}</td>
-          <td>${entry.unit}</td>
-          <td>${formatDateTime(entry.mulai)}</td>
-          <td>${formatDateTime(entry.selesai)}</td>
-          <td>${entry.lokasi}</td>
-          <td>${entry.ket}</td>
-          <td class="action-cell">
-            <button class="btn-delete" onclick="deleteRow(${entry.id})">
-              <i class="fas fa-trash"></i> Hapus
-            </button>
-          </td>
-        `;
-        tableBody.appendChild(row);
-      });
-    }
-
-    function formatDateTime(dateTimeString) {
-      if (!dateTimeString) return '';
-      
-      const date = new Date(dateTimeString);
-      return date.toLocaleString('id-ID', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-    }
-
-    // Form Handling
-    document.getElementById("pemakaianForm").addEventListener("submit", e => {
-      e.preventDefault();
-      
-      // Validate end date is after start date
-      const startDate = new Date(document.getElementById("mulaiPemakaian").value);
-      const endDate = new Date(document.getElementById("selesaiPemakaian").value);
-      
-      if (endDate <= startDate) {
-        alert("Tanggal selesai harus setelah tanggal mulai!");
-        return;
+        if (file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          
+          reader.onload = function(e) {
+            const photoData = {
+              id: Date.now() + i,
+              data: e.target.result
+            };
+            
+            photoArray.push(photoData);
+            renderPhotoPreview(photoData, previewContainer, photoArray);
+          };
+          
+          reader.readAsDataURL(file);
+        }
       }
       
-      addRow(
-        "Pemakaian",
-        document.getElementById("namaOperator").value,
-        document.getElementById("unitPemakaian").value,
-        document.getElementById("mulaiPemakaian").value,
-        document.getElementById("selesaiPemakaian").value,
-        document.getElementById("lokasiPemakaian").value,
-        `Sebelum: ${document.getElementById("kondisiSebelum").value}; Sesudah: ${document.getElementById("kondisiSesudah").value}`
-      );
-      e.target.reset();
-      
-      // Show success feedback
-      showSuccessMessage("Data pemakaian berhasil disimpan!");
-      
-      // Navigate to historical page
-      document.querySelector('.nav-link[data-page="historical"]').click();
-    });
-
-    function showSuccessMessage(message) {
-      // Create a temporary success message
-      const successMsg = document.createElement('div');
-      successMsg.textContent = message;
-      successMsg.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: var(--accent);
-        color: white;
-        padding: 12px 20px;
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        z-index: 1000;
-        animation: fadeInOut 3s ease-in-out;
+      // Reset the input to allow selecting the same file again
+      event.target.value = '';
+    }
+    
+    function renderPhotoPreview(photoData, previewContainer, photoArray) {
+      const photoItem = document.createElement('div');
+      photoItem.className = 'photo-item';
+      photoItem.innerHTML = `
+        <img src="${photoData.data}" alt="Preview">
+        <button class="remove-photo" data-id="${photoData.id}">&times;</button>
       `;
       
-      document.body.appendChild(successMsg);
+      previewContainer.appendChild(photoItem);
       
-      // Remove the message after animation completes
-      setTimeout(() => {
-        if (document.body.contains(successMsg)) {
-          document.body.removeChild(successMsg);
+      // Add event listener to remove button
+      const removeButton = photoItem.querySelector('.remove-photo');
+      removeButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = parseInt(e.target.getAttribute('data-id'));
+        const index = photoArray.findIndex(photo => photo.id === id);
+        
+        if (index !== -1) {
+          photoArray.splice(index, 1);
+          photoItem.remove();
         }
-      }, 3000);
+      });
     }
-
-    // Add CSS for the fade animation
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes fadeInOut {
-        0% { opacity: 0; transform: translateY(-20px); }
-        20% { opacity: 1; transform: translateY(0); }
-        80% { opacity: 1; transform: translateY(0); }
-        100% { opacity: 0; transform: translateY(-20px); }
+    
+    // Modal functionality
+    const modal = document.getElementById('photoModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeModal = document.querySelector('.close-modal');
+    
+    closeModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+    
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
       }
-    `;
-    document.head.appendChild(style);
-  </script>
-</body>
-</html>
+    });
+    
+    // Load saved data on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      applyConfiguration();
+      renderTable();
+      
+      // Set up configuration page
+      document.getElementById('companyName').value = appConfig.companyName;
+      
+      // Set active color option
+      document.querySelectorAll('.color-option').forEach(option => {
+        if (option.getAttribute('data-color') === appConfig.primaryColor) {
+          option.classList.add('active');
+        } else {
+          option.classList.remove('active');
+        }
+      });
+    });
+
+    // Configuration Event Handlers
+    document.getElementById('logoUpload').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('logoPreview').src = e.target.result;
+          document.getElementById('logoPreview').style.display = 'block';
+          document.getElementById('logoTextPreview').style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+    
+    document.getElementById('saveLogo').addEventListener('click', function() {
+      const logoPreview = document.getElementById('logoPreview');
+      const companyName = document.getElementById('companyName').value;
+      
+      if (logoPreview.src && logoPreview.style.display !== 'none') {
+        appConfig.logo = logoPreview.src;
+      } else {
+        appConfig.logo = '';
+      }
+      
+      if (companyName) {
+        appConfig.companyName = companyName;
+      }
+      
+      localStorage.setItem('appConfig', JSON.stringify(appConfig));
+      applyConfiguration();
+      showSuccessMessage("Pengaturan logo berhasil disimpan!");
+    });
+    
+    document.getElementById('resetLogo').addEventListener('click', function() {
+      appConfig.logo = '';
+      appConfig.companyName = 'Sistem Manajemen Scissor Lift';
+      localStorage.setItem('appConfig', JSON.stringify(appConfig));
+      applyConfiguration();
+      document.getElementById('companyName').value = appConfig.companyName;
