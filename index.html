@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scissor Lift Management System</title>
+  <title>Sistem Manajemen Scissor Lift</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* Base Styles */
@@ -371,36 +371,72 @@
         overflow-x: auto;
       }
     }
+    
+    /* Additional Styles for Information Cards */
+    .usage-info {
+      background: white;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    
+    .info-card {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-left: 4px solid var(--primary);
+      background: #f8f9fa;
+    }
+    
+    .info-card h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+    
+    .info-card ul {
+      padding-left: 1.5rem;
+    }
+    
+    .info-card li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .required::after {
+      content: " *";
+      color: var(--danger);
+    }
   </style>
 </head>
 <body>
   <!-- Navigation -->
   <nav class="navbar">
-    <div class="logo">Scissor Lift Management</div>
+    <div class="logo">Sistem Manajemen Scissor Lift</div>
     <div class="nav-links">
-      <a href="#" class="nav-link active" data-page="landing">Home</a>
-      <a href="#" class="nav-link" data-page="reserve">Reserve</a>
-      <a href="#" class="nav-link" data-page="historical">Historical</a>
+      <a href="#" class="nav-link active" data-page="landing">Beranda</a>
+      <a href="#" class="nav-link" data-page="reserve">Reservasi</a>
+      <a href="#" class="nav-link" data-page="historical">Riwayat</a>
     </div>
   </nav>
 
   <!-- Landing Page -->
   <section id="landing" class="page active">
     <div class="landing">
-      <h1>Scissor Lift Management System</h1>
-      <p>Manage your scissor lift reservations and track usage history with our comprehensive system</p>
+      <h1>Sistem Manajemen Scissor Lift</h1>
+      <p>Kelola reservasi scissor lift dan lacak riwayat penggunaan dengan sistem kami yang komprehensif</p>
       
       <div class="action-buttons">
         <a href="#" class="action-btn" data-page="reserve">
           <i class="fas fa-calendar-plus"></i>
-          <h3>Reserve</h3>
-          <p>Make a new scissor lift reservation</p>
+          <h3>Reservasi</h3>
+          <p>Buat reservasi scissor lift baru</p>
         </a>
         
         <a href="#" class="action-btn" data-page="historical">
           <i class="fas fa-history"></i>
-          <h3>Historical</h3>
-          <p>View reservation and usage history</p>
+          <h3>Riwayat</h3>
+          <p>Lihat riwayat reservasi dan penggunaan</p>
         </a>
       </div>
     </div>
@@ -408,29 +444,29 @@
 
   <!-- Reserve Page -->
   <section id="reserve" class="page">
-    <h1>Reserve Scissor Lift</h1>
+    <h1>Reservasi Scissor Lift</h1>
     
     <div class="form-container">
       <form id="pemakaianForm">
         <h2>Form Pemakaian Scissor Lift</h2>
         
         <div class="form-group">
-          <label for="namaOperator">Nama Operator</label>
+          <label for="namaOperator" class="required">Nama Operator</label>
           <input type="text" id="namaOperator" required>
         </div>
         
         <div class="form-group">
-          <label for="unitPemakaian">Nomor Unit</label>
+          <label for="unitPemakaian" class="required">Nomor Unit</label>
           <input type="text" id="unitPemakaian" required>
         </div>
         
         <div class="form-group">
-          <label for="mulaiPemakaian">Tanggal & Jam Mulai</label>
+          <label for="mulaiPemakaian" class="required">Tanggal & Jam Mulai</label>
           <input type="datetime-local" id="mulaiPemakaian" required>
         </div>
         
         <div class="form-group">
-          <label for="selesaiPemakaian">Tanggal & Jam Selesai</label>
+          <label for="selesaiPemakaian" class="required">Tanggal & Jam Selesai</label>
           <input type="datetime-local" id="selesaiPemakaian" required>
         </div>
         
@@ -441,36 +477,51 @@
         
         <div class="form-group">
           <label for="kondisiSebelum">Kondisi Sebelum</label>
-          <textarea id="kondisiSebelum"></textarea>
+          <textarea id="kondisiSebelum" placeholder="Deskripsikan kondisi scissor lift sebelum digunakan..."></textarea>
         </div>
         
         <div class="form-group">
           <label for="kondisiSesudah">Kondisi Sesudah</label>
-          <textarea id="kondisiSesudah"></textarea>
+          <textarea id="kondisiSesudah" placeholder="Deskripsikan kondisi scissor lift setelah digunakan..."></textarea>
         </div>
         
-        <button type="submit">Catat Pemakaian</button>
+        <button type="submit">Simpan Pemakaian</button>
       </form>
       
       <div class="usage-info">
-        <h2>Information</h2>
+        <h2>Informasi</h2>
         <div class="info-card">
-          <h3><i class="fas fa-info-circle"></i> Instructions</h3>
+          <h3><i class="fas fa-info-circle"></i> Petunjuk Pengisian</h3>
           <ul>
-            <li>Fill in all required fields marked with *</li>
-            <li>Provide accurate equipment condition details</li>
-            <li>Record both start and end times accurately</li>
-            <li>Specify the exact work location</li>
+            <li>Isi semua bidang yang wajib diisi (ditandai dengan *)</li>
+            <li>Berikan detail kondisi peralatan yang akurat</li>
+            <li>Catat waktu mulai dan selesai dengan tepat</li>
+            <li>Tentukan lokasi kerja yang jelas</li>
+            <li>Periksa kembali data sebelum menyimpan</li>
           </ul>
         </div>
         
         <div class="info-card">
-          <h3><i class="fas fa-exclamation-triangle"></i> Safety Guidelines</h3>
+          <h3><i class="fas fa-exclamation-triangle"></i> Panduan Keselamatan</h3>
           <ul>
-            <li>Always inspect equipment before use</li>
-            <li>Use proper personal protective equipment</li>
-            <li>Follow manufacturer's operating instructions</li>
-            <li>Report any equipment issues immediately</li>
+            <li>Selalu inspeksi peralatan sebelum digunakan</li>
+            <li>Gunakan alat pelindung diri (APD) yang sesuai</li>
+            <li>Ikuti instruksi operasi dari pabrikan</li>
+            <li>Laporkan masalah peralatan segera</li>
+            <li>Jangan melebihi kapasitas beban maksimum</li>
+            <li>Pastikan area kerja aman dan stabil</li>
+            <li>Gunakan sistem pengaman dengan benar</li>
+          </ul>
+        </div>
+        
+        <div class="info-card">
+          <h3><i class="fas fa-clipboard-check"></i> Prosedur Operasi</h3>
+          <ul>
+            <li>Lakukan inspeksi visual sebelum penggunaan</li>
+            <li>Pastikan semua kontrol berfungsi dengan baik</li>
+            <li>Uji sistem darurat sebelum operasi</li>
+            <li>Pastikan area kerja bebas dari hambatan</li>
+            <li>Gunakan sistem pengaman saat bekerja di ketinggian</li>
           </ul>
         </div>
       </div>
@@ -479,7 +530,7 @@
 
   <!-- Historical Page -->
   <section id="historical" class="page">
-    <h1>Historical Data</h1>
+    <h1>Data Riwayat</h1>
     
     <div class="table-container">
       <table id="dataTable">
@@ -551,10 +602,12 @@
     }
 
     function deleteRow(id) {
-      savedData = savedData.filter(entry => entry.id !== id);
-      localStorage.setItem('scissorLiftData', JSON.stringify(savedData));
-      renderTable();
-      showSuccessMessage("Data berhasil dihapus!");
+      if (confirm("Apakah Anda yakin ingin menghapus data ini?")) {
+        savedData = savedData.filter(entry => entry.id !== id);
+        localStorage.setItem('scissorLiftData', JSON.stringify(savedData));
+        renderTable();
+        showSuccessMessage("Data berhasil dihapus!");
+      }
     }
 
     function renderTable() {
@@ -605,6 +658,16 @@
     // Form Handling
     document.getElementById("pemakaianForm").addEventListener("submit", e => {
       e.preventDefault();
+      
+      // Validate end date is after start date
+      const startDate = new Date(document.getElementById("mulaiPemakaian").value);
+      const endDate = new Date(document.getElementById("selesaiPemakaian").value);
+      
+      if (endDate <= startDate) {
+        alert("Tanggal selesai harus setelah tanggal mulai!");
+        return;
+      }
+      
       addRow(
         "Pemakaian",
         document.getElementById("namaOperator").value,
@@ -658,36 +721,6 @@
         20% { opacity: 1; transform: translateY(0); }
         80% { opacity: 1; transform: translateY(0); }
         100% { opacity: 0; transform: translateY(-20px); }
-      }
-      
-      .usage-info {
-        background: white;
-        padding: 1.5rem;
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-      }
-      
-      .info-card {
-        margin-bottom: 1.5rem;
-        padding: 1rem;
-        border-left: 4px solid var(--primary);
-        background: #f8f9fa;
-      }
-      
-      .info-card h3 {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 0.5rem;
-        color: var(--primary);
-      }
-      
-      .info-card ul {
-        padding-left: 1.5rem;
-      }
-      
-      .info-card li {
-        margin-bottom: 0.5rem;
       }
     `;
     document.head.appendChild(style);
