@@ -313,6 +313,14 @@
       background: #5a6268;
     }
     
+    .btn-danger {
+      background: var(--danger);
+    }
+    
+    .btn-danger:hover {
+      background: #c82333;
+    }
+    
     .color-picker {
       display: flex;
       gap: 1rem;
@@ -627,6 +635,34 @@
       content: " *";
       color: var(--danger);
     }
+    
+    /* Notification Styles */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 1rem;
+      border-radius: var(--radius);
+      color: white;
+      font-weight: 500;
+      z-index: 1001;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.3s ease;
+    }
+    
+    .notification.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .notification.success {
+      background-color: var(--accent);
+    }
+    
+    .notification.error {
+      background-color: var(--danger);
+    }
   </style>
 </head>
 <body>
@@ -663,452 +699,4 @@
           <p>Lihat riwayat reservasi dan penggunaan</p>
         </a>
         
-        <a href="#" class="action-btn" data-page="configuration">
-          <i class="fas fa-cog"></i>
-          <h3>Konfigurasi</h3>
-          <p>Ubah logo dan pengaturan sistem</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Reserve Page -->
-  <section id="reserve" class="page">
-    <h1>Reservasi Scissor Lift</h1>
-    
-    <div class="form-container">
-      <form id="pemakaianForm">
-        <h2>Form Pemakaian Scissor Lift</h2>
-        
-        <div class="form-group">
-          <label for="namaOperator" class="required">Nama Operator</label>
-          <input type="text" id="namaOperator" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="unitPemakaian" class="required">Nomor Unit</label>
-          <input type="text" id="unitPemakaian" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="mulaiPemakaian" class="required">Tanggal & Jam Mulai</label>
-          <input type="datetime-local" id="mulaiPemakaian" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="selesaiPemakaian" class="required">Tanggal & Jam Selesai</label>
-          <input type="datetime-local" id="selesaiPemakaian" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="lokasiPemakaian">Lokasi Kerja</label>
-          <input type="text" id="lokasiPemakaian">
-        </div>
-        
-        <div class="form-group">
-          <label>Kondisi Sebelum</label>
-          <div class="photo-upload-container">
-            <div class="photo-upload-box" id="sebelumUpload">
-              <i class="fas fa-camera"></i>
-              <p>Klik untuk menambahkan foto kondisi sebelum</p>
-              <input type="file" id="sebelumInput" accept="image/*" multiple style="display: none;">
-            </div>
-            <div class="photo-preview" id="sebelumPreview"></div>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label>Kondisi Sesudah</label>
-          <div class="photo-upload-container">
-            <div class="photo-upload-box" id="sesudahUpload">
-              <i class="fas fa-camera"></i>
-              <p>Klik untuk menambahkan foto kondisi sesudah</p>
-              <input type="file" id="sesudahInput" accept="image/*" multiple style="display: none;">
-            </div>
-            <div class="photo-preview" id="sesudahPreview"></div>
-          </div>
-        </div>
-        
-        <button type="submit">Simpan Pemakaian</button>
-      </form>
-      
-      <div class="usage-info">
-        <h2>Informasi</h2>
-        <div class="info-card">
-          <h3><i class="fas fa-info-circle"></i> Petunjuk Pengisian</h3>
-          <ul>
-            <li>Isi semua bidang yang wajib diisi (ditandai dengan *)</li>
-            <li>Tambahkan foto kondisi sebelum dan sesudah penggunaan</li>
-            <li>Foto akan membantu dokumentasi kondisi peralatan</li>
-            <li>Catat waktu mulai dan selesai dengan tepat</li>
-            <li>Tentukan lokasi kerja yang jelas</li>
-            <li>Periksa kembali data sebelum menyimpan</li>
-          </ul>
-        </div>
-        
-        <div class="info-card">
-          <h3><i class="fas fa-exclamation-triangle"></i> Panduan Keselamatan</h3>
-          <ul>
-            <li>Selalu inspeksi peralatan sebelum digunakan</li>
-            <li>Gunakan alat pelindung diri (APD) yang sesuai</li>
-            <li>Ikuti instruksi operasi dari pabrikan</li>
-            <li>Laporkan masalah peralatan segera</li>
-            <li>Jangan melebihi kapasitas beban maksimum</li>
-            <li>Pastikan area kerja aman dan stabil</li>
-            <li>Gunakan sistem pengaman dengan benar</li>
-          </ul>
-        </div>
-        
-        <div class="info-card">
-          <h3><i class="fas fa-clipboard-check"></i> Prosedur Operasi</h3>
-          <ul>
-            <li>Lakukan inspeksi visual sebelum penggunaan</li>
-            <li>Pastikan semua kontrol berfungsi dengan baik</li>
-            <li>Uji sistem darurat sebelum operasi</li>
-            <li>Pastikan area kerja bebas dari hambatan</li>
-            <li>Gunakan sistem pengaman saat bekerja di ketinggian</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Historical Page -->
-  <section id="historical" class="page">
-    <h1>Data Riwayat</h1>
-    
-    <div class="table-container">
-      <table id="dataTable">
-        <thead>
-          <tr>
-            <th>Tipe Form</th>
-            <th>Nama</th>
-            <th>Unit</th>
-            <th>Mulai</th>
-            <th>Selesai</th>
-            <th>Lokasi</th>
-            <th>Foto</th>
-            <th>Aksi</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- Configuration Page -->
-  <section id="configuration" class="page">
-    <h1>Konfigurasi Sistem</h1>
-    
-    <div class="config-container">
-      <div class="config-section">
-        <h2><i class="fas fa-image"></i> Pengaturan Logo</h2>
-        <p>Unggah logo perusahaan Anda untuk ditampilkan di header aplikasi.</p>
-        
-        <div class="logo-preview">
-          <img id="logoPreview" src="" alt="Preview Logo">
-          <div id="logoTextPreview" class="logo-text">Sistem Manajemen Scissor Lift</div>
-        </div>
-        
-        <div class="form-group">
-          <label for="logoUpload">Unggah Logo Baru</label>
-          <input type="file" id="logoUpload" accept="image/*">
-        </div>
-        
-        <div class="form-group">
-          <label for="companyName">Nama Perusahaan</label>
-          <input type="text" id="companyName" placeholder="Masukkan nama perusahaan">
-        </div>
-        
-        <div class="logo-actions">
-          <button id="saveLogo" class="btn-primary">Simpan Logo</button>
-          <button id="resetLogo" class="btn-secondary">Reset ke Default</button>
-        </div>
-      </div>
-      
-      <div class="config-section">
-        <h2><i class="fas fa-palette"></i> Pengaturan Warna</h2>
-        <p>Pilih skema warna untuk aplikasi.</p>
-        
-        <div class="color-picker">
-          <div class="color-option active" style="background-color: #005f9e;" data-color="#005f9e"></div>
-          <div class="color-option" style="background-color: #28a745;" data-color="#28a745"></div>
-          <div class="color-option" style="background-color: #dc3545;" data-color="#dc3545"></div>
-          <div class="color-option" style="background-color: #6f42c1;" data-color="#6f42c1"></div>
-          <div class="color-option" style="background-color: #fd7e14;" data-color="#fd7e14"></div>
-          <div class="color-option" style="background-color: #20c997;" data-color="#20c997"></div>
-        </div>
-        
-        <button id="saveColor" class="btn-primary" style="margin-top: 1rem;">Simpan Warna</button>
-      </div>
-      
-      <div class="config-section">
-        <h2><i class="fas fa-database"></i> Pengaturan Data</h2>
-        <p>Kelola data yang tersimpan di aplikasi.</p>
-        
-        <div class="form-group">
-          <button id="exportData" class="btn-primary">Ekspor Data ke JSON</button>
-          <button id="importData" class="btn-secondary" style="margin-top: 0.5rem;">Impor Data dari JSON</button>
-          <input type="file" id="importFile" accept=".json" style="display: none;">
-        </div>
-        
-        <div class="form-group">
-          <button id="clearData" class="btn-danger">Hapus Semua Data</button>
-          <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 0.5rem;">
-            Peringatan: Tindakan ini akan menghapus semua data riwayat dan tidak dapat dibatalkan.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Modal for Photo View -->
-  <div id="photoModal" class="modal">
-    <span class="close-modal">&times;</span>
-    <div class="modal-content">
-      <img id="modalImage" src="" alt="Foto Kondisi">
-    </div>
-  </div>
-
-  <script>
-    // Configuration Management
-    let appConfig = JSON.parse(localStorage.getItem('appConfig')) || {
-      logo: '',
-      companyName: 'Sistem Manajemen Scissor Lift',
-      primaryColor: '#005f9e'
-    };
-
-    // Apply configuration on page load
-    function applyConfiguration() {
-      // Apply logo
-      const headerLogo = document.getElementById('headerLogo');
-      const logoPreview = document.getElementById('logoPreview');
-      const headerText = document.getElementById('headerText');
-      const logoTextPreview = document.getElementById('logoTextPreview');
-      
-      if (appConfig.logo) {
-        headerLogo.src = appConfig.logo;
-        logoPreview.src = appConfig.logo;
-        headerText.style.display = 'none';
-        logoTextPreview.style.display = 'none';
-      } else {
-        headerLogo.style.display = 'none';
-        logoPreview.style.display = 'none';
-        headerText.textContent = appConfig.companyName;
-        logoTextPreview.textContent = appConfig.companyName;
-      }
-      
-      // Apply primary color
-      document.documentElement.style.setProperty('--primary', appConfig.primaryColor);
-      document.documentElement.style.setProperty('--primary-light', lightenColor(appConfig.primaryColor, 20));
-      document.documentElement.style.setProperty('--primary-dark', darkenColor(appConfig.primaryColor, 20));
-    }
-    
-    // Color utility functions
-    function lightenColor(color, percent) {
-      const num = parseInt(color.replace("#", ""), 16);
-      const amt = Math.round(2.55 * percent);
-      const R = (num >> 16) + amt;
-      const G = (num >> 8 & 0x00FF) + amt;
-      const B = (num & 0x0000FF) + amt;
-      return "#" + (
-        0x1000000 +
-        (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
-        (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
-        (B < 255 ? (B < 1 ? 0 : B) : 255)
-      ).toString(16).slice(1);
-    }
-    
-    function darkenColor(color, percent) {
-      const num = parseInt(color.replace("#", ""), 16);
-      const amt = Math.round(2.55 * percent);
-      const R = (num >> 16) - amt;
-      const G = (num >> 8 & 0x00FF) - amt;
-      const B = (num & 0x0000FF) - amt;
-      return "#" + (
-        0x1000000 +
-        (R > 0 ? (R < 255 ? R : 255) : 0) * 0x10000 +
-        (G > 0 ? (G < 255 ? G : 255) : 0) * 0x100 +
-        (B > 0 ? (B < 255 ? B : 255) : 0)
-      ).toString(16).slice(1);
-    }
-
-    // Page Navigation
-    document.querySelectorAll('.nav-link, .action-btn').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetPage = this.getAttribute('data-page');
-        
-        // Update active nav link
-        document.querySelectorAll('.nav-link').forEach(nav => {
-          nav.classList.remove('active');
-        });
-        document.querySelector(`.nav-link[data-page="${targetPage}"]`).classList.add('active');
-        
-        // Hide all pages
-        document.querySelectorAll('.page').forEach(page => {
-          page.classList.remove('active');
-        });
-        
-        // Show target page
-        document.getElementById(targetPage).classList.add('active');
-      });
-    });
-
-    // Data Management
-    const tableBody = document.querySelector("#dataTable tbody");
-    let savedData = JSON.parse(localStorage.getItem('scissorLiftData')) || [];
-
-    // Photo Upload Functionality
-    const sebelumUpload = document.getElementById('sebelumUpload');
-    const sebelumInput = document.getElementById('sebelumInput');
-    const sebelumPreview = document.getElementById('sebelumPreview');
-    
-    const sesudahUpload = document.getElementById('sesudahUpload');
-    const sesudahInput = document.getElementById('sesudahInput');
-    const sesudahPreview = document.getElementById('sesudahPreview');
-    
-    let sebelumPhotos = [];
-    let sesudahPhotos = [];
-    
-    // Set up photo upload for kondisi sebelum
-    sebelumUpload.addEventListener('click', () => {
-      sebelumInput.click();
-    });
-    
-    sebelumInput.addEventListener('change', (e) => {
-      handlePhotoUpload(e, sebelumPhotos, sebelumPreview);
-    });
-    
-    // Set up photo upload for kondisi sesudah
-    sesudahUpload.addEventListener('click', () => {
-      sesudahInput.click();
-    });
-    
-    sesudahInput.addEventListener('change', (e) => {
-      handlePhotoUpload(e, sesudahPhotos, sesudahPreview);
-    });
-    
-    function handlePhotoUpload(event, photoArray, previewContainer) {
-      const files = event.target.files;
-      
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        
-        if (file.type.startsWith('image/')) {
-          const reader = new FileReader();
-          
-          reader.onload = function(e) {
-            const photoData = {
-              id: Date.now() + i,
-              data: e.target.result
-            };
-            
-            photoArray.push(photoData);
-            renderPhotoPreview(photoData, previewContainer, photoArray);
-          };
-          
-          reader.readAsDataURL(file);
-        }
-      }
-      
-      // Reset the input to allow selecting the same file again
-      event.target.value = '';
-    }
-    
-    function renderPhotoPreview(photoData, previewContainer, photoArray) {
-      const photoItem = document.createElement('div');
-      photoItem.className = 'photo-item';
-      photoItem.innerHTML = `
-        <img src="${photoData.data}" alt="Preview">
-        <button class="remove-photo" data-id="${photoData.id}">&times;</button>
-      `;
-      
-      previewContainer.appendChild(photoItem);
-      
-      // Add event listener to remove button
-      const removeButton = photoItem.querySelector('.remove-photo');
-      removeButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const id = parseInt(e.target.getAttribute('data-id'));
-        const index = photoArray.findIndex(photo => photo.id === id);
-        
-        if (index !== -1) {
-          photoArray.splice(index, 1);
-          photoItem.remove();
-        }
-      });
-    }
-    
-    // Modal functionality
-    const modal = document.getElementById('photoModal');
-    const modalImage = document.getElementById('modalImage');
-    const closeModal = document.querySelector('.close-modal');
-    
-    closeModal.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
-    
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-    
-    // Load saved data on page load
-    window.addEventListener('DOMContentLoaded', () => {
-      applyConfiguration();
-      renderTable();
-      
-      // Set up configuration page
-      document.getElementById('companyName').value = appConfig.companyName;
-      
-      // Set active color option
-      document.querySelectorAll('.color-option').forEach(option => {
-        if (option.getAttribute('data-color') === appConfig.primaryColor) {
-          option.classList.add('active');
-        } else {
-          option.classList.remove('active');
-        }
-      });
-    });
-
-    // Configuration Event Handlers
-    document.getElementById('logoUpload').addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (file && file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          document.getElementById('logoPreview').src = e.target.result;
-          document.getElementById('logoPreview').style.display = 'block';
-          document.getElementById('logoTextPreview').style.display = 'none';
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-    
-    document.getElementById('saveLogo').addEventListener('click', function() {
-      const logoPreview = document.getElementById('logoPreview');
-      const companyName = document.getElementById('companyName').value;
-      
-      if (logoPreview.src && logoPreview.style.display !== 'none') {
-        appConfig.logo = logoPreview.src;
-      } else {
-        appConfig.logo = '';
-      }
-      
-      if (companyName) {
-        appConfig.companyName = companyName;
-      }
-      
-      localStorage.setItem('appConfig', JSON.stringify(appConfig));
-      applyConfiguration();
-      showSuccessMessage("Pengaturan logo berhasil disimpan!");
-    });
-    
-    document.getElementById('resetLogo').addEventListener('click', function() {
-      appConfig.logo = '';
-      appConfig.companyName = 'Sistem Manajemen Scissor Lift';
-      localStorage.setItem('appConfig', JSON.stringify(appConfig));
-      applyConfiguration();
-      document.getElementById('companyName').value = appConfig.companyName;
+        <a href="#" class="action-btn"
