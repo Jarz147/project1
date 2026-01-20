@@ -1,3 +1,6 @@
+body {
+  background: red !important;
+}
 /* CSS Playground - Edit me! */
 
 /* CSS Variables - Try changing these colors! */
@@ -208,4 +211,5 @@ body {
 .stat:hover .stat-value {
   color: var(--primary);
   transition: color 0.3s ease;
+
 }
